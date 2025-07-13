@@ -559,58 +559,6 @@
         </div>
     </div>
     
-    <!-- Modal para mostrar estado del envío -->
-    <div class="modal" id="statusModal">
-        <div class="modal-content">
-            <div id="spinner" class="spinner"></div>
-            <div id="successIcon" class="success-icon" style="display: none;">✓</div>
-            <div id="errorIcon" class="error-icon" style="display: none;">✗</div>
-            <h3 id="modalTitle">Enviando datos...</h3>
-            <p id="modalMessage">Por favor espere mientras procesamos su información</p>
-            <button class="modal-btn" id="modalButton" style="display: none;">Aceptar</button>
-        </div>
-    </div>
-
-    <script>
-        // Función para mostrar modal
-        function showModal(title, message, isSuccess, showButton) {
-            const modal = document.getElementById('statusModal');
-            const spinner = document.getElementById('spinner');
-            const successIcon = document.getElementById('successIcon');
-            const errorIcon = document.getElementById('errorIcon');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalMessage = document.getElementById('modalMessage');
-            const modalButton = document.getElementById('modalButton');
-            
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            
-            if (isSuccess) {
-                spinner.style.display = 'none';
-                successIcon.style.display = 'block';
-                modalButton.style.display = 'block';
-            } else if (isSuccess === false) {
-                spinner.style.display = 'none';
-                errorIcon.style.display = 'block';
-                modalButton.style.display = 'block';
-            } else {
-                spinner.style.display = 'block';
-                successIcon.style.display = 'none';
-                errorIcon.style.display = 'none';
-                modalButton.style.display = 'none';
-            }
-            
-            modal.style.display = 'flex';
-            
-            if (showButton) {
-                modalButton.style.display = 'block';
-            }
-        }
-        
-        // Función para ocultar modal
-        function hideModal() {
-            document.getElementById('statusModal').style.display = 'none';
-        }
 
     <script>
         // Función para mostrar campos adicionales según interés seleccionado
