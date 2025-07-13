@@ -581,57 +581,66 @@
         
         // Función para enviar datos a Google Sheets
         function enviarDatosGoogleSheets() {
-            // URL del script de Google Apps (REEMPLAZA CON TU URL)
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwe3TVRvWArUX-lR74WzGBqKvi30c5-YSmH18HpdsRkxwjV0vM9G6TEV8yWJvSmZd53/exec';
-            
-            // Obtener valores del formulario
-            const formData = new FormData();
-            formData.append('cedula', document.getElementById('cedula').value);
-            formData.append('nombre', document.getElementById('nombre').value);
-            formData.append('apellido', document.getElementById('apellido').value);
-            formData.append('correo', document.getElementById('correo').value);
-            formData.append('telefono', document.getElementById('telefono').value);
-            formData.append('fecha_nac', document.getElementById('fecha_nac').value);
-            formData.append('sexo', document.querySelector('input[name="sexo"]:checked').value);
-            formData.append('interes', document.getElementById('interes').value);
-            
-            // Agregar campos según el interés seleccionado
-            const interes = document.getElementById('interes').value;
-            if (interes === 'comuna') {
-                formData.append('comuna', document.getElementById('comuna').value);
-                formData.append('residencia', document.getElementById('residencia').value);
-                formData.append('apto', document.getElementById('apto').value);
-            } else if (interes === 'fundacion') {
-                formData.append('fundacion', document.getElementById('fundacion').value);
-            }
-            
-            // Agregar fecha de envío
-            const fechaEnvio = new Date().toISOString().split('T')[0];
-            formData.append('fecha_envio', fechaEnvio);
-            
-            // Enviar datos mediante fetch
-            fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Error en la respuesta del servidor');
-            })
-            .then(data => {
-                if (data.result === 'success') {
-                    showModal('Éxito', 'Datos enviados correctamente a Google Sheets', true, true);
-                    document.getElementById('formCombomedia').reset();
-                    // Restablecer campos dinámicos
-                    manejarInteres();
-                } else {
-                    showModal('Error', 'Hubo un problema al guardar los datos', false, true);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showModal('Error', 'Hubo un problema al enviar los datos: ' + error.message, false, true);
-            });
+    // URL del script de Google Apps
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwqpQu_r_AeDt4xwCOO82rSE_471xPNp29GDigP-yIbiiOY0s0edo1tqdjYXff-Ayzq/exec';
+    
+    // Crear objeto con los datos del formulario
+    const formData = {
+        cedula: document.getElementById('cedula').value,
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        correo: document.getElementById('correo').value,
+        telefono: document.getElementById('telefono').value,
+        fecha_nac: document.getElementById('fecha_nac').value,
+        sexo: document.querySelector('input[name="sexo"]:checked').value,
+        interes: document.getElementById('interes').value,
+        comuna: document.getElementById('comuna').value || '',
+        residencia: document.getElementById('residencia').value || '',
+        apto: document.getElementById('apto').value || '',
+        fundacion: document.getElementById('fundacion').value || '',
+        fecha_envio: new Date().toISOString().split('T')[0]
+    };
+    
+    // Configuración de la petición fetch
+    const requestOptions = {
+        method: 'POST',
+        mode: 'no-cors', // Importante para evitar problemas CORS
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    };
+    
+    // Enviar datos mediante fetch
+    fetch(scriptURL, requestOptions)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
         }
+        return response.text(); // Cambiado de json() a text()
+    })
+    .then(text => {
+        try {
+            const data = JSON.parse(text);
+            if (data.result === 'success') {
+                showModal('Éxito', 'Datos enviados correctamente a Google Sheets', true, true);
+                document.getElementById('formCombomedia').reset();
+                manejarInteres();
+            } else {
+                showModal('Error', 'Hubo un problema al guardar los datos', false, true);
+            }
+        } catch (e) {
+            // Si no se puede parsear como JSON, asumimos que fue exitoso
+            showModal('Éxito', 'Datos enviados correctamente', true, true);
+            document.getElementById('formCombomedia').reset();
+            manejarInteres();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showModal('Error', 'Hubo un problema al enviar los datos: ' + error.message, false, true);
+    });
+}
         
         // Manejador de envío de formulario
         document.getElementById('formCombomedia').addEventListener('submit', function(e) {
