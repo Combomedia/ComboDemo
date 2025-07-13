@@ -3,21 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combomedia - Formulario de Registro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Formulario Vendedores - Agua Pura</title>
     <style>
-        :root {
-            --primary: #1a2980;
-            --secondary: #26d0ce;
-            --accent: #b21f1f;
-            --light: #f8f9fa;
-            --dark: #333;
-            --success: #2ecc71;
-            --error: #e74c3c;
-            --gray: #6c757d;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -26,89 +13,53 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: var(--dark);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
             padding: 20px;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-attachment: fixed;
         }
         
         .container {
-            max-width: 1000px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.97);
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            margin: 20px;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, #1a2980, #26d0ce);
             color: white;
-            padding: 30px 40px;
+            padding: 25px 40px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
         }
         
         .logo {
-            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 24px;
             font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            z-index: 2;
-            position: relative;
         }
         
         .logo-icon {
-            font-size: 36px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            margin-right: 10px;
+            font-size: 32px;
         }
         
         h1 {
-            font-size: 2.4rem;
-            margin: 15px 0;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            position: relative;
         }
         
         .subtitle {
-            font-size: 1.15rem;
-            opacity: 0.92;
-            max-width: 700px;
-            margin: 0 auto;
-            z-index: 2;
-            position: relative;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .content {
@@ -119,78 +70,67 @@
             background-color: white;
             border-radius: 10px;
             padding: 25px;
-            box-shadow: var(--shadow);
-            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 22px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 25px;
         }
         
-        .form-section {
-            margin-bottom: 35px;
+        th {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1rem;
         }
         
-        .section-title {
-            font-size: 1.45rem;
-            color: var(--primary);
-            margin: 25px 0 18px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
         }
         
-        .section-title i {
-            color: var(--accent);
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
         
-        .form-group {
-            margin-bottom: 22px;
-            position: relative;
+        tr:hover {
+            background-color: #e9f7fe;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 600;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            color: #1a2980;
         }
         
-        .required::after {
-            content: " *";
-            color: var(--error);
-        }
-        
-        input, select, textarea {
+        input, select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 10px 12px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1rem;
             transition: all 0.3s;
-            background: #f9f9f9;
         }
         
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--secondary);
+        input:focus, select:focus {
+            border-color: #26d0ce;
             outline: none;
             box-shadow: 0 0 0 3px rgba(38, 208, 206, 0.2);
-            background: white;
+        }
+        
+        input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
         }
         
         .radio-group {
             display: flex;
-            gap: 20px;
-            margin-top: 8px;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 5px;
         }
         
         .radio-group label {
@@ -198,47 +138,29 @@
             align-items: center;
             font-weight: normal;
             cursor: pointer;
-            gap: 8px;
-            padding: 8px 15px;
-            border-radius: 6px;
-            background: #f0f8ff;
-            transition: all 0.2s;
-        }
-        
-        .radio-group label:hover {
-            background: #e1f0fa;
-        }
-        
-        .radio-group input:checked + span {
-            color: var(--primary);
-            font-weight: 600;
         }
         
         .btn-container {
             text-align: center;
-            margin-top: 35px;
+            margin-top: 20px;
         }
         
         button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, #1a2980, #26d0ce);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.15rem;
+            padding: 14px 35px;
+            font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
-            box-shadow: 0 5px 15px rgba(26, 41, 128, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            box-shadow: 0 4px 10px rgba(26, 41, 128, 0.3);
         }
         
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(26, 41, 128, 0.4);
-            background: linear-gradient(to right, #16267a, #20c5c3);
+            box-shadow: 0 6px 15px rgba(26, 41, 128, 0.4);
         }
         
         button:active {
@@ -246,56 +168,28 @@
         }
         
         .instructions {
-            background: linear-gradient(to right, #e3f2fd, #e1f7f6);
-            border-left: 4px solid var(--primary);
-            padding: 18px 22px;
-            margin: 25px 0;
+            background-color: #e3f2fd;
+            border-left: 4px solid #1a2980;
+            padding: 15px 20px;
+            margin: 20px 0;
             border-radius: 0 8px 8px 0;
-            font-size: 1.05rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .instructions::before {
-            content: '!';
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 80px;
-            opacity: 0.05;
-            font-weight: bold;
-            color: var(--primary);
         }
         
         .footer {
             text-align: center;
-            padding: 25px;
-            color: var(--gray);
-            font-size: 0.95rem;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
             border-top: 1px solid #eee;
             margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
         
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-        
-        .footer-links a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent);
-            text-decoration: underline;
+        .section-title {
+            font-size: 1.4rem;
+            color: #1a2980;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #26d0ce;
         }
         
         .modal {
@@ -305,38 +199,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.4s;
         }
         
         .modal-content {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 10px;
             max-width: 500px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-            animation: slideIn 0.5s;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .spinner {
             border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--secondary);
+            border-top: 5px solid #26d0ce;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
+            margin: 0 auto 20px;
         }
         
         @keyframes spin {
@@ -345,86 +231,85 @@
         }
         
         .success-icon {
-            color: var(--success);
-            font-size: 60px;
-            margin-bottom: 25px;
-            animation: scaleIn 0.5s;
+            color: #2ecc71;
+            font-size: 50px;
+            margin-bottom: 20px;
         }
         
         .error-icon {
-            color: var(--error);
-            font-size: 60px;
-            margin-bottom: 25px;
-            animation: shake 0.5s;
-        }
-        
-        @keyframes scaleIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
+            color: #e74c3c;
+            font-size: 50px;
+            margin-bottom: 20px;
         }
         
         .modal-btn {
-            margin-top: 25px;
-            background: var(--primary);
-            padding: 12px 30px;
-            font-size: 1rem;
+            margin-top: 20px;
+            background: #1a2980;
         }
         
-        .security-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f0faff;
-            padding: 12px 15px;
+        .conditional-section {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
             border-radius: 8px;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            border-left: 3px solid #26d0ce;
+            display: none;
+        }
+        
+        .conditional-section h3 {
             color: #1a2980;
+            margin-bottom: 10px;
         }
         
         @media (max-width: 768px) {
-            .content {
-                padding: 20px;
+            .container {
+                margin: 10px;
             }
             
             header {
-                padding: 25px 20px;
+                padding: 20px;
             }
             
-            h1 {
-                font-size: 1.8rem;
+            .logo {
+                position: static;
+                justify-content: center;
+                margin-bottom: 10px;
             }
             
-            .form-grid {
-                grid-template-columns: 1fr;
+            .content {
+                padding: 15px;
             }
             
-            .radio-group {
-                flex-direction: column;
-                gap: 10px;
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
             }
             
-            .modal-content {
-                padding: 25px;
+            tr {
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            td {
+                border-bottom: none;
+            }
+            
+            th {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <body>
     <div class="container">
         <header>
             <div class="logo">
-                <span class="logo-icon"><i class="fas fa-chart-network"></i></span>
-                <div>COMBOMEDIA</div>
+                <span class="logo-icon">💧</span>
+                AGUA PURA
             </div>
-            <h1>Formulario de Registro</h1>
+            <h1>Registro de Vendedores</h1>
             <p class="subtitle">Complete todos los datos requeridos para el registro en el sistema</p>
         </header>
         
@@ -432,6 +317,7 @@
             <div class="instructions">
                 <h3>Instrucciones:</h3>
                 <p>Por favor complete todos los campos del formulario. Los campos marcados con asterisco (*) son obligatorios.</p>
+                <p>Al seleccionar "Interés" se mostrarán campos adicionales según su elección.</p>
             </div>
             
             <div class="form-container">
@@ -470,66 +356,89 @@
                         </tr>
                         <tr>
                             <td>
-                                <label>Sexo *</label>
-                                <div class="radio-group">
-                                    <label><input type="radio" name="sexo" value="Masculino" required> Masculino</label>
-                                    <label><input type="radio" name="sexo" value="Femenino"> Femenino</label>
-                                </div>
+                                <label for="sexo">Sexo *</label>
+                                <select id="sexo" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
                             </td>
                             <td>
                                 <label for="interes">Interés *</label>
-                                <select id="interes" required onchange="mostrarCamposAdicionales()">
-                                    <option value="">Seleccione una opción</option>
+                                <select id="interes" required>
+                                    <option value="">Seleccione...</option>
                                     <option value="Comuna">Comuna</option>
                                     <option value="Fundacion">Fundación</option>
                                 </select>
                             </td>
                         </tr>
                     </table>
-
-                    <!-- Campo Comuna (solo visible si se selecciona Comuna) -->
-                    <div id="seccionComuna" style="display: none;">
-                        <h2 class="section-title">Datos de Comuna</h2>
+                    
+                    <!-- Sección condicional para Comuna -->
+                    <div id="comunaSection" class="conditional-section">
+                        <h3>Datos de Comuna</h3>
                         <table>
                             <tr>
                                 <td>
                                     <label for="comuna">Comuna *</label>
-                                    <select id="comuna" onchange="mostrarResidencias()">
+                                    <select id="comuna">
                                         <option value="">Seleccione una comuna</option>
                                         <option value="Parque Central">Parque Central</option>
                                     </select>
                                 </td>
-                                <td>
-                                    <label for="residencia">Residencia *</label>
-                                    <select id="residencia" onchange="mostrarAptos()" style="display: none;">
-                                        <option value="">Seleccione una residencia</option>
-                                        <option value="Tejar">Tejar</option>
-                                        <option value="San Martin">San Martin</option>
-                                        <option value="Mohedano">Mohedano</option>
-                                        <option value="Anauco">Anauco</option>
-                                        <option value="Tajama">Tajama</option>
-                                        <option value="Catuche">Catuche</option>
-                                        <option value="Caroata">Caroata</option>
-                                        <option value="Tacagua">Tacagua</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="apto">Apto *</label>
-                                    <select id="apto" style="display: none;">
-                                        <option value="">Seleccione un apto</option>
-                                        <!-- Las opciones se cargarán dinámicamente -->
-                                    </select>
-                                </td>
-                                <td></td>
                             </tr>
                         </table>
+                        
+                        <div id="residenciaSection" class="conditional-section">
+                            <h3>Datos de Residencia</h3>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="residencia">Residencia *</label>
+                                        <select id="residencia">
+                                            <option value="">Seleccione una residencia</option>
+                                            <option value="Tejar">Tejar</option>
+                                            <option value="San Martin">San Martin</option>
+                                            <option value="Mohedano">Mohedano</option>
+                                            <option value="Anauco">Anauco</option>
+                                            <option value="Tajama">Tajama</option>
+                                            <option value="Catuche">Catuche</option>
+                                            <option value="Caroata">Caroata</option>
+                                            <option value="Tacagua">Tacagua</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <div id="aptoSection" class="conditional-section">
+                                <h3>Datos de Apartamento</h3>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for="apto">Apto *</label>
+                                            <select id="apto">
+                                                <option value="">Seleccione un apto</option>
+                                                <option value="01A">01A</option>
+                                                <option value="01B">01B</option>
+                                                <option value="01C">01C</option>
+                                                <option value="01D">01D</option>
+                                                <option value="01E">01E</option>
+                                                <option value="01F">01F</option>
+                                                <option value="01G">01G</option>
+                                                <option value="01H">01H</option>
+                                                <option value="01J">01J</option>
+                                                <option value="01K">01K</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Campo Fundaciones (solo visible si se selecciona Fundación) -->
-                    <div id="seccionFundaciones" style="display: none;">
-                        <h2 class="section-title">Datos de Fundación</h2>
+                    
+                    <!-- Sección condicional para Fundación -->
+                    <div id="fundacionSection" class="conditional-section">
+                        <h3>Datos de Fundación</h3>
                         <table>
                             <tr>
                                 <td>
@@ -541,7 +450,6 @@
                                         <option value="Observatorio Popular de medios">Observatorio Popular de medios</option>
                                     </select>
                                 </td>
-                                <td></td>
                             </tr>
                         </table>
                     </div>
@@ -559,122 +467,236 @@
         </div>
     </div>
     
+    <!-- Modal para mostrar estado del envío -->
+    <div class="modal" id="statusModal">
+        <div class="modal-content">
+            <div id="spinner" class="spinner"></div>
+            <div id="successIcon" class="success-icon" style="display: none;">✓</div>
+            <div id="errorIcon" class="error-icon" style="display: none;">✗</div>
+            <h3 id="modalTitle">Enviando datos...</h3>
+            <p id="modalMessage">Por favor espere mientras procesamos su información</p>
+            <button class="modal-btn" id="modalButton" style="display: none;">Aceptar</button>
+        </div>
+    </div>
 
     <script>
-        // Función para mostrar campos adicionales según interés seleccionado
-        function mostrarCamposAdicionales() {
+        // Mostrar/ocultar secciones condicionales
+        function toggleConditionalSections() {
             const interes = document.getElementById('interes').value;
-            const seccionComuna = document.getElementById('seccionComuna');
-            const seccionFundaciones = document.getElementById('seccionFundaciones');
+            const comunaSection = document.getElementById('comunaSection');
+            const fundacionSection = document.getElementById('fundacionSection');
             
-            seccionComuna.style.display = (interes === 'Comuna') ? 'block' : 'none';
-            seccionFundaciones.style.display = (interes === 'Fundacion') ? 'block' : 'none';
+            // Resetear campos al cambiar
+            document.getElementById('comuna').value = '';
+            document.getElementById('residencia').value = '';
+            document.getElementById('apto').value = '';
+            document.getElementById('fundaciones').value = '';
+            document.getElementById('residenciaSection').style.display = 'none';
+            document.getElementById('aptoSection').style.display = 'none';
             
-            // Resetear valores al cambiar
-            if (interes !== 'Comuna') {
-                document.getElementById('comuna').value = '';
-                document.getElementById('residencia').value = '';
-                document.getElementById('apto').value = '';
-                document.getElementById('residencia').style.display = 'none';
-                document.getElementById('apto').style.display = 'none';
-            }
-            if (interes !== 'Fundacion') {
-                document.getElementById('fundaciones').value = '';
-            }
-        }
-        
-        // Función para mostrar residencias cuando se selecciona comuna
-        function mostrarResidencias() {
-            const comuna = document.getElementById('comuna').value;
-            const residencia = document.getElementById('residencia');
-            
-            residencia.style.display = (comuna === 'Parque Central') ? 'block' : 'none';
-            if (comuna !== 'Parque Central') {
-                residencia.value = '';
-                document.getElementById('apto').value = '';
-                document.getElementById('apto').style.display = 'none';
-            }
-        }
-        
-        // Función para mostrar aptos según residencia seleccionada
-        function mostrarAptos() {
-            const residencia = document.getElementById('residencia').value;
-            const aptoSelect = document.getElementById('apto');
-            
-            if (!residencia) {
-                aptoSelect.style.display = 'none';
-                return;
-            }
-            
-            // Generar opciones de apto (primeras 10 opciones)
-            aptoSelect.innerHTML = '<option value="">Seleccione un apto</option>';
-            const aptos = [
-                '01A', '01B', '01C', '01D', '01E', 
-                '01F', '01G', '01H', '01J', '01K'
-            ];
-            
-            aptos.forEach(apto => {
-                const option = document.createElement('option');
-                option.value = apto;
-                option.textContent = apto;
-                aptoSelect.appendChild(option);
-            });
-            
-            aptoSelect.style.display = 'block';
-        }
-
-        // Función para validar formulario (actualizada)
-        function validarFormulario() {
-            // ... (validaciones existentes de cédula, teléfono, etc.) ...
-            
-            // Validar campos condicionales
-            const interes = document.getElementById('interes').value;
             if (interes === 'Comuna') {
-                if (!document.getElementById('comuna').value) {
+                comunaSection.style.display = 'block';
+                fundacionSection.style.display = 'none';
+            } else if (interes === 'Fundacion') {
+                comunaSection.style.display = 'none';
+                fundacionSection.style.display = 'block';
+            } else {
+                comunaSection.style.display = 'none';
+                fundacionSection.style.display = 'none';
+            }
+        }
+        
+        // Mostrar/ocultar residencias según comuna
+        function toggleResidencias() {
+            const comuna = document.getElementById('comuna').value;
+            const residenciaSection = document.getElementById('residenciaSection');
+            
+            // Resetear campos al cambiar
+            document.getElementById('residencia').value = '';
+            document.getElementById('apto').value = '';
+            document.getElementById('aptoSection').style.display = 'none';
+            
+            if (comuna === 'Parque Central') {
+                residenciaSection.style.display = 'block';
+            } else {
+                residenciaSection.style.display = 'none';
+            }
+        }
+        
+        // Mostrar/ocultar aptos según residencia
+        function toggleAptos() {
+            const residencia = document.getElementById('residencia').value;
+            const aptoSection = document.getElementById('aptoSection');
+            
+            // Resetear campo al cambiar
+            document.getElementById('apto').value = '';
+            
+            if (residencia) {
+                aptoSection.style.display = 'block';
+            } else {
+                aptoSection.style.display = 'none';
+            }
+        }
+        
+        // Configurar eventos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fecha de nacimiento (25 años atrás)
+            const fechaNac = new Date();
+            fechaNac.setFullYear(fechaNac.getFullYear() - 25);
+            document.getElementById('fecha_nac').value = fechaNac.toISOString().split('T')[0];
+            
+            // Event listeners para campos condicionales
+            document.getElementById('interes').addEventListener('change', toggleConditionalSections);
+            document.getElementById('comuna').addEventListener('change', toggleResidencias);
+            document.getElementById('residencia').addEventListener('change', toggleAptos);
+            
+            // Configurar botón de modal
+            document.getElementById('modalButton').addEventListener('click', hideModal);
+        });
+        
+        // Función para mostrar modal
+        function showModal(title, message, isSuccess, showButton) {
+            const modal = document.getElementById('statusModal');
+            const spinner = document.getElementById('spinner');
+            const successIcon = document.getElementById('successIcon');
+            const errorIcon = document.getElementById('errorIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalButton = document.getElementById('modalButton');
+            
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            
+            if (isSuccess) {
+                spinner.style.display = 'none';
+                successIcon.style.display = 'block';
+                modalButton.style.display = 'block';
+            } else if (isSuccess === false) {
+                spinner.style.display = 'none';
+                errorIcon.style.display = 'block';
+                modalButton.style.display = 'block';
+            } else {
+                spinner.style.display = 'block';
+                successIcon.style.display = 'none';
+                errorIcon.style.display = 'none';
+                modalButton.style.display = 'none';
+            }
+            
+            modal.style.display = 'flex';
+            
+            if (showButton) {
+                modalButton.style.display = 'block';
+            }
+        }
+        
+        // Función para ocultar modal
+        function hideModal() {
+            document.getElementById('statusModal').style.display = 'none';
+        }
+        
+        // Función para validar formulario
+        function validarFormulario() {
+            // Validación de cédula (8-10 dígitos)
+            const cedula = document.getElementById('cedula').value;
+            if (!/^\d{8,10}$/.test(cedula)) {
+                showModal('Error', 'Cédula inválida: debe tener entre 8 y 10 dígitos numéricos', false, true);
+                return false;
+            }
+
+            // Validación de teléfono (10-11 dígitos)
+            const telefono = document.getElementById('telefono').value;
+            if (!/^\d{10,11}$/.test(telefono)) {
+                showModal('Error', 'Teléfono inválido: debe tener 10 o 11 dígitos numéricos', false, true);
+                return false;
+            }
+
+            // Validación de correo
+            const correo = document.getElementById('correo').value;
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+                showModal('Error', 'Correo electrónico inválido: por favor ingrese un correo válido', false, true);
+                return false;
+            }
+
+            // Validación de fecha de nacimiento
+            const fechaNac = new Date(document.getElementById('fecha_nac').value);
+            const hoy = new Date();
+            if (fechaNac >= hoy) {
+                showModal('Error', 'Fecha de nacimiento inválida: debe ser una fecha anterior al día de hoy', false, true);
+                return false;
+            }
+
+            // Validación de sexo
+            const sexo = document.getElementById('sexo').value;
+            if (!sexo) {
+                showModal('Error', 'Por favor seleccione el sexo', false, true);
+                return false;
+            }
+            
+            // Validación de interés
+            const interes = document.getElementById('interes').value;
+            if (!interes) {
+                showModal('Error', 'Por favor seleccione el tipo de interés', false, true);
+                return false;
+            }
+            
+            // Validación de campos condicionales
+            if (interes === 'Comuna') {
+                const comuna = document.getElementById('comuna').value;
+                const residencia = document.getElementById('residencia').value;
+                const apto = document.getElementById('apto').value;
+                
+                if (!comuna) {
                     showModal('Error', 'Por favor seleccione una comuna', false, true);
                     return false;
                 }
-                if (!document.getElementById('residencia').value) {
+                
+                if (!residencia) {
                     showModal('Error', 'Por favor seleccione una residencia', false, true);
                     return false;
                 }
-                if (!document.getElementById('apto').value) {
+                
+                if (!apto) {
                     showModal('Error', 'Por favor seleccione un apto', false, true);
                     return false;
                 }
             } else if (interes === 'Fundacion') {
-                if (!document.getElementById('fundaciones').value) {
+                const fundaciones = document.getElementById('fundaciones').value;
+                if (!fundaciones) {
                     showModal('Error', 'Por favor seleccione una fundación', false, true);
                     return false;
                 }
             }
-            
+
             return true;
         }
         
-        // Función para enviar datos (actualizada)
+        // Función para enviar datos a Google Sheets
         function enviarDatosGoogleSheets() {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxsknB45qUKhUe86VQ-4w7A9eLyz1u9HewrG-OWJfTJuF6j4WlhKvaFNUF_An4EKgY3/exec';
-            const formData = new FormData();
+            // URL del script de Google Apps (debes reemplazarlo con tu propio script)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyhYaNohB1OV2EMpCPkHiBbxwcz1nPH605p0D3LEsDnMyQ-zJHzGOs6pRNj_XjIbBKB/exec';
             
-            // Campos básicos
+            // Obtener valores del formulario
+            const formData = new FormData();
             formData.append('nombre', document.getElementById('nombre').value);
             formData.append('apellido', document.getElementById('apellido').value);
             formData.append('cedula', document.getElementById('cedula').value);
             formData.append('telefono', document.getElementById('telefono').value);
             formData.append('correo', document.getElementById('correo').value);
             formData.append('fecha_nac', document.getElementById('fecha_nac').value);
-            formData.append('sexo', document.querySelector('input[name="sexo"]:checked').value);
+            formData.append('sexo', document.getElementById('sexo').value);
+            formData.append('interes', document.getElementById('interes').value);
             
-            // Campos condicionales
+            // Agregar campos condicionales según la selección
             const interes = document.getElementById('interes').value;
-            formData.append('interes', interes);
-            
             if (interes === 'Comuna') {
                 formData.append('comuna', document.getElementById('comuna').value);
                 formData.append('residencia', document.getElementById('residencia').value);
                 formData.append('apto', document.getElementById('apto').value);
+                formData.append('fundaciones', ''); // Campo vacío para fundaciones
             } else if (interes === 'Fundacion') {
+                formData.append('comuna', ''); // Campo vacío para comuna
+                formData.append('residencia', ''); // Campo vacío para residencia
+                formData.append('apto', ''); // Campo vacío para apto
                 formData.append('fundaciones', document.getElementById('fundaciones').value);
             }
             
@@ -692,12 +714,13 @@
                     document.getElementById('formVendedor').reset();
                     
                     // Restablecer fechas después de enviar
-                    const hoy = new Date().toISOString().split('T')[0];
-                    document.getElementById('fecha_ingreso').value = hoy;
-                    
                     const fechaNac = new Date();
                     fechaNac.setFullYear(fechaNac.getFullYear() - 25);
                     document.getElementById('fecha_nac').value = fechaNac.toISOString().split('T')[0];
+                    
+                    // Ocultar secciones condicionales
+                    document.getElementById('comunaSection').style.display = 'none';
+                    document.getElementById('fundacionSection').style.display = 'none';
                 } else {
                     showModal('Error', 'Hubo un problema al guardar los datos', false, true);
                 }
@@ -716,32 +739,6 @@
                 showModal('Enviando', 'Por favor espere mientras enviamos sus datos', null, false);
                 setTimeout(enviarDatosGoogleSheets, 1500);
             }
-        });
-        
-        // Configurar fechas por defecto al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            const hoy = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha_ingreso').value = hoy;
-            
-            const fechaNac = new Date();
-            fechaNac.setFullYear(fechaNac.getFullYear() - 25);
-            document.getElementById('fecha_nac').value = fechaNac.toISOString().split('T')[0];
-            
-            // Configurar botón de modal
-            document.getElementById('modalButton').addEventListener('click', hideModal);
-        }
-        
-        // Inicialización (actualizada)
-        document.addEventListener('DOMContentLoaded', function() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const fechaNac = new Date();
-            fechaNac.setFullYear(fechaNac.getFullYear() - 25);
-            document.getElementById('fecha_nac').value = fechaNac.toISOString().split('T')[0];
-            
-            // Configurar listeners para campos dinámicos
-            document.getElementById('interes').addEventListener('change', mostrarCamposAdicionales);
-            document.getElementById('comuna').addEventListener('change', mostrarResidencias);
-            document.getElementById('residencia').addEventListener('change', mostrarAptos);
         });
     </script>
 </body>
