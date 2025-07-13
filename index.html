@@ -711,28 +711,59 @@
             }
         }
         
-        // Función para enviar datos a Google Sheets (simulación)
+        // Función para enviar datos a Google Sheets
         function enviarDatosGoogleSheets() {
             // URL del script de Google Apps (REEMPLAZA CON TU URL)
-const scriptURL = 'https://script.google.com/macros/s/AKfycby0RbmYhhicVVuIwk0JoTEewmcyj59ph2AE2V0dhOKVe3ZVBl-uN_OoXTDBySHw2KgC/exec';
-            // Simulamos un retraso de red de 1.5 segundos
-            setTimeout(() => {
-                // En un entorno real, esto enviaría los datos a Google Sheets
-                // Aquí simulamos un envío exitoso el 90% de las veces
-                const success = Math.random() > 0.1;
-                
-                if (success) {
-                    showModal('Éxito', 'Datos enviados correctamente a Google Sheets', true, true);
-                    
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxkVyfHoR1vfZ4i30DHRz6Yb29FLF7IGdiJ1ICIiIx5TlenVRB8iPKF_Len9P_ryTcT/exec'; // <-- Reemplaza con tu URL
+            
+            // Crear objeto FormData con los datos del formulario
+            const formData = new FormData();
+            formData.append('cedula', document.getElementById('cedula').value);
+            formData.append('nombre', document.getElementById('nombre').value);
+            formData.append('apellido', document.getElementById('apellido').value);
+            formData.append('correo', document.getElementById('correo').value);
+            formData.append('telefono', document.getElementById('telefono').value);
+            formData.append('fecha_nac', document.getElementById('fecha_nac').value);
+            formData.append('sexo', document.querySelector('input[name="sexo"]:checked').value);
+            formData.append('interes', document.getElementById('interes').value);
+            
+            // Agregar campos según el interés seleccionado
+            const interes = document.getElementById('interes').value;
+            if (interes === 'comuna') {
+                formData.append('comuna', document.getElementById('comuna').value);
+                formData.append('residencia', document.getElementById('residencia').value);
+                formData.append('apto', document.getElementById('apto').value);
+            } else if (interes === 'fundacion') {
+                formData.append('fundacion', document.getElementById('fundacion').value);
+            }
+            
+            // Agregar fecha de envío
+            const fechaEnvio = new Date().toISOString().split('T')[0];
+            formData.append('fecha_envio', fechaEnvio);
+            
+            // Enviar datos mediante fetch
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Error en la respuesta del servidor');
+            })
+            .then(data => {
+                if (data.result === 'success') {
+                    showModal('Éxito', data.message || 'Datos enviados correctamente a Google Sheets', true, true);
                     // Limpiar formulario después de éxito
                     document.getElementById('formCombomedia').reset();
-                    
                     // Restablecer campos dinámicos
                     manejarInteres();
                 } else {
-                    showModal('Error', 'Hubo un problema al enviar los datos. Por favor intente nuevamente.', false, true);
+                    showModal('Error', data.message || 'Hubo un problema al guardar los datos', false, true);
                 }
-            }, 1500);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showModal('Error', 'Hubo un problema al enviar los datos: ' + error.message, false, true);
+            });
         }
         
         // Manejador de envío de formulario
