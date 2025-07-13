@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combomedia - Formulario de Registro</title>
+    <style>
+        :root {
+            --primary: #1a2980;
+            --secondary: #26d0ce;
+            --accent: #b21f1f;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #2ecc71;
+            --error: #e74c3c;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary));
+            color: var(--dark);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--error);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(38, 208, 206, 0.2);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(26, 41, 128, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 41, 128, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .instructions {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success-icon {
+            color: var(--success);
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .error-icon {
+            color: var(--error);
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-btn {
+            margin-top: 20px;
+            background: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <div>COMBOMEDIA</div>
+            </div>
+            <h1>Formulario de Registro</h1>
+            <p class="subtitle">Complete todos los datos requeridos para el registro en el sistema</p>
+        </header>
+        
+        <div class="content">
+            <div class="instructions">
+                <h3>Instrucciones:</h3>
+                <p>Por favor complete todos los campos del formulario. Los campos marcados con asterisco (*) son obligatorios.</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="formCombomedia">
+                    <div class="form-section">
+                        <h2 class="section-title">Datos Personales</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="cedula" class="required">Cédula</label>
+                                <input type="text" id="cedula" placeholder="Ej: 12345678" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="nombre" class="required">Nombre</label>
+                                <input type="text" id="nombre" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="apellido" class="required">Apellido</label>
+                                <input type="text" id="apellido" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="correo" class="required">Correo Electrónico</label>
+                                <input type="email" id="correo" placeholder="Ej: nombre@ejemplo.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="telefono" class="required">Teléfono</label>
+                                <input type="tel" id="telefono" placeholder="Ej: 04121234567" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fecha_nac" class="required">Fecha de Nacimiento</label>
+                                <input type="date" id="fecha_nac" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sexo" class="required">Sexo</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="sexo" value="masculino" required> Masculino</label>
+                                    <label><input type="radio" name="sexo" value="femenino"> Femenino</label>
+                                    <label><input type="radio" name="sexo" value="otro"> Otro</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2 class="section-title">Información de Interés</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="interes" class="required">Interés</label>
+                                <select id="interes" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="comuna">Comuna</option>
+                                    <option value="fundacion">Fundación</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Campos para Comuna -->
+                            <div class="form-group comuna-group" style="display: none;">
+                                <label for="comuna" class="required">Comuna</label>
+                                <select id="comuna" required>
+                                    <option value="">Seleccione una comuna</option>
+                                    <option value="parque_central">Parque Central</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group residencia-group" style="display: none;">
+                                <label for="residencia" class="required">Residencia</label>
+                                <select id="residencia" required>
+                                    <option value="">Seleccione una residencia</option>
+                                    <option value="tejar">Tejar</option>
+                                    <option value="san_martin">San Martin</option>
+                                    <option value="mohedano">Mohedano</option>
+                                    <option value="anauco">Anauco</option>
+                                    <option value="tajama">Tajama</option>
+                                    <option value="catuche">Catuche</option>
+                                    <option value="caroata">Caroata</option>
+                                    <option value="tacagua">Tacagua</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group apto-group" style="display: none;">
+                                <label for="apto" class="required">Apto</label>
+                                <select id="apto" required>
+                                    <option value="">Seleccione un apto</option>
+                                    <option value="01A">01A</option>
+                                    <option value="01B">01B</option>
+                                    <option value="01C">01C</option>
+                                    <option value="01D">01D</option>
+                                    <option value="01E">01E</option>
+                                    <option value="01F">01F</option>
+                                    <option value="01G">01G</option>
+                                    <option value="01H">01H</option>
+                                    <option value="01J">01J</option>
+                                    <option value="01K">01K</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Campos para Fundación -->
+                            <div class="form-group fundacion-group" style="display: none;">
+                                <label for="fundacion" class="required">Fundación</label>
+                                <select id="fundacion" required>
+                                    <option value="">Seleccione una fundación</option>
+                                    <option value="mision_ribas">Misión Ribas</option>
+                                    <option value="causa_campesina">Fundación Causa Campesina</option>
+                                    <option value="observatorio">Observatorio Popular de Medios</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-container">
+                        <button type="submit">Enviar Datos</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="footer">
+                <p>Sistema de Registro &copy; 2023 - Combomedia</p>
+                <p>Los datos se guardan automáticamente en nuestra base de datos</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para mostrar estado del envío -->
+    <div class="modal" id="statusModal">
+        <div class="modal-content">
+            <div id="spinner" class="spinner"></div>
+            <div id="successIcon" class="success-icon" style="display: none;">✓</div>
+            <div id="errorIcon" class="error-icon" style="display: none;">✗</div>
+            <h3 id="modalTitle">Enviando datos...</h3>
+            <p id="modalMessage">Por favor espere mientras procesamos su información</p>
+            <button class="modal-btn" id="modalButton" style="display: none;">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar modal
+        function showModal(title, message, isSuccess, showButton) {
+            const modal = document.getElementById('statusModal');
+            const spinner = document.getElementById('spinner');
+            const successIcon = document.getElementById('successIcon');
+            const errorIcon = document.getElementById('errorIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalButton = document.getElementById('modalButton');
+            
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            
+            if (isSuccess) {
+                spinner.style.display = 'none';
+                successIcon.style.display = 'block';
+                modalButton.style.display = 'block';
+            } else if (isSuccess === false) {
+                spinner.style.display = 'none';
+                errorIcon.style.display = 'block';
+                modalButton.style.display = 'block';
+            } else {
+                spinner.style.display = 'block';
+                successIcon.style.display = 'none';
+                errorIcon.style.display = 'none';
+                modalButton.style.display = 'none';
+            }
+            
+            modal.style.display = 'flex';
+            
+            if (showButton) {
+                modalButton.style.display = 'block';
+            }
+        }
+        
+        // Función para ocultar modal
+        function hideModal() {
+            document.getElementById('statusModal').style.display = 'none';
+        }
+        
+        // Función para validar formulario
+        function validarFormulario() {
+            // Validación de cédula (8-10 dígitos)
+            const cedula = document.getElementById('cedula').value;
+            if (!/^\d{8,10}$/.test(cedula)) {
+                showModal('Error', 'Cédula inválida: debe tener entre 8 y 10 dígitos numéricos', false, true);
+                return false;
+            }
+
+            // Validación de teléfono (10-11 dígitos)
+            const telefono = document.getElementById('telefono').value;
+            if (!/^\d{10,11}$/.test(telefono)) {
+                showModal('Error', 'Teléfono inválido: debe tener 10 o 11 dígitos numéricos', false, true);
+                return false;
+            }
+
+            // Validación de correo
+            const correo = document.getElementById('correo').value;
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+                showModal('Error', 'Correo electrónico inválido: por favor ingrese un correo válido', false, true);
+                return false;
+            }
+
+            // Validación de fecha de nacimiento
+            const fechaNac = new Date(document.getElementById('fecha_nac').value);
+            const hoy = new Date();
+            if (fechaNac >= hoy) {
+                showModal('Error', 'Fecha de nacimiento inválida: debe ser una fecha anterior al día de hoy', false, true);
+                return false;
+            }
+
+            // Validación de sexo
+            const sexo = document.querySelector('input[name="sexo"]:checked');
+            if (!sexo) {
+                showModal('Error', 'Por favor seleccione su sexo', false, true);
+                return false;
+            }
+
+            // Validar campos dinámicos según interés
+            const interes = document.getElementById('interes').value;
+            
+            if (interes === 'comuna') {
+                const comuna = document.getElementById('comuna').value;
+                const residencia = document.getElementById('residencia').value;
+                const apto = document.getElementById('apto').value;
+                
+                if (!comuna) {
+                    showModal('Error', 'Por favor seleccione una comuna', false, true);
+                    return false;
+                }
+                if (!residencia) {
+                    showModal('Error', 'Por favor seleccione una residencia', false, true);
+                    return false;
+                }
+                if (!apto) {
+                    showModal('Error', 'Por favor seleccione un apto', false, true);
+                    return false;
+                }
+            } else if (interes === 'fundacion') {
+                const fundacion = document.getElementById('fundacion').value;
+                if (!fundacion) {
+                    showModal('Error', 'Por favor seleccione una fundación', false, true);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
+        // Función para manejar cambios en el campo de interés
+        function manejarInteres() {
+            const interes = document.getElementById('interes').value;
+            
+            // Ocultar todos los grupos primero
+            document.querySelector('.comuna-group').style.display = 'none';
+            document.querySelector('.residencia-group').style.display = 'none';
+            document.querySelector('.apto-group').style.display = 'none';
+            document.querySelector('.fundacion-group').style.display = 'none';
+            
+            // Resetear valores
+            document.getElementById('comuna').value = '';
+            document.getElementById('residencia').value = '';
+            document.getElementById('apto').value = '';
+            document.getElementById('fundacion').value = '';
+            
+            if (interes === 'comuna') {
+                document.querySelector('.comuna-group').style.display = 'block';
+            } else if (interes === 'fundacion') {
+                document.querySelector('.fundacion-group').style.display = 'block';
+            }
+        }
+        
+        // Función para manejar cambios en la comuna
+        function manejarComuna() {
+            const comuna = document.getElementById('comuna').value;
+            
+            document.querySelector('.residencia-group').style.display = 'none';
+            document.querySelector('.apto-group').style.display = 'none';
+            
+            // Resetear valores
+            document.getElementById('residencia').value = '';
+            document.getElementById('apto').value = '';
+            
+            if (comuna === 'parque_central') {
+                document.querySelector('.residencia-group').style.display = 'block';
+            }
+        }
+        
+        // Función para manejar cambios en la residencia
+        function manejarResidencia() {
+            const residencia = document.getElementById('residencia').value;
+            
+            document.querySelector('.apto-group').style.display = 'none';
+            document.getElementById('apto').value = '';
+            
+            if (residencia) {
+                document.querySelector('.apto-group').style.display = 'block';
+            }
+        }
+        
+        // Función para enviar datos a Google Sheets
+        function enviarDatosGoogleSheets() {
+            // URL del script de Google Apps (REEMPLAZA CON TU URL)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwe3TVRvWArUX-lR74WzGBqKvi30c5-YSmH18HpdsRkxwjV0vM9G6TEV8yWJvSmZd53/exec';
+            
+            // Obtener valores del formulario
+            const formData = new FormData();
+            formData.append('cedula', document.getElementById('cedula').value);
+            formData.append('nombre', document.getElementById('nombre').value);
+            formData.append('apellido', document.getElementById('apellido').value);
+            formData.append('correo', document.getElementById('correo').value);
+            formData.append('telefono', document.getElementById('telefono').value);
+            formData.append('fecha_nac', document.getElementById('fecha_nac').value);
+            formData.append('sexo', document.querySelector('input[name="sexo"]:checked').value);
+            formData.append('interes', document.getElementById('interes').value);
+            
+            // Agregar campos según el interés seleccionado
+            const interes = document.getElementById('interes').value;
+            if (interes === 'comuna') {
+                formData.append('comuna', document.getElementById('comuna').value);
+                formData.append('residencia', document.getElementById('residencia').value);
+                formData.append('apto', document.getElementById('apto').value);
+            } else if (interes === 'fundacion') {
+                formData.append('fundacion', document.getElementById('fundacion').value);
+            }
+            
+            // Agregar fecha de envío
+            const fechaEnvio = new Date().toISOString().split('T')[0];
+            formData.append('fecha_envio', fechaEnvio);
+            
+            // Enviar datos mediante fetch
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Error en la respuesta del servidor');
+            })
+            .then(data => {
+                if (data.result === 'success') {
+                    showModal('Éxito', 'Datos enviados correctamente a Google Sheets', true, true);
+                    document.getElementById('formCombomedia').reset();
+                    // Restablecer campos dinámicos
+                    manejarInteres();
+                } else {
+                    showModal('Error', 'Hubo un problema al guardar los datos', false, true);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showModal('Error', 'Hubo un problema al enviar los datos: ' + error.message, false, true);
+            });
+        }
+        
+        // Manejador de envío de formulario
+        document.getElementById('formCombomedia').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validarFormulario()) {
+                showModal('Enviando', 'Por favor espere mientras enviamos sus datos', null, false);
+                enviarDatosGoogleSheets();
+            }
+        });
+        
+        // Configurar eventos al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar eventos para campos dinámicos
+            document.getElementById('interes').addEventListener('change', manejarInteres);
+            document.getElementById('comuna').addEventListener('change', manejarComuna);
+            document.getElementById('residencia').addEventListener('change', manejarResidencia);
+            
+            // Configurar botón de modal
+            document.getElementById('modalButton').addEventListener('click', hideModal);
+            
+            // Establecer fecha de nacimiento por defecto (hace 25 años)
+            const fechaNac = new Date();
+            fechaNac.setFullYear(fechaNac.getFullYear() - 25);
+            document.getElementById('fecha_nac').value = fechaNac.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
