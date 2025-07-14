@@ -6,19 +6,19 @@
     <title>Combomedia - Registro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-         :root {
-            --primary: #0d47a1;
-            --secondary: #00bcd4;
+        :root {
+            --primary: #219665;
+            --secondary: #00d48d;
             --accent: #ff6f00;
-            --dark: #1a237e;
+            --dark: #111111;
             --light: #e3f2fd;
             --success: #4caf50;
             --error: #f44336;
-            --text: #263238;
+            --text: #111111;
             --text-light: #eceff1;
             --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --shadow: 0 28px 60px rgba(0, 0, 0, 0.12);
+            --transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         
         * {
@@ -29,7 +29,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0d47a1, #1a237e);
+            background: linear-gradient(135deg, #111111, #1a7e54);
             color: var(--text);
             padding: 20px;
             min-height: 100vh;
@@ -40,12 +40,12 @@
             max-width: 1200px;
             margin: 0 auto;
             background-color: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 60px;
             box-shadow: var(--shadow);
             overflow: hidden;
             transform: translateY(20px);
             opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
+            animation: fadeInUp 1.2s ease-out forwards;
         }
         
         @keyframes fadeInUp {
@@ -71,7 +71,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
             transform: rotate(30deg);
             pointer-events: none;
         }
@@ -92,7 +92,7 @@
             font-size: 36px;
             color: var(--secondary);
             filter: drop-shadow(0 0 5px rgba(0, 188, 212, 0.5));
-            animation: pulse 2s infinite;
+            animation: pulse 1s infinite;
         }
         
         @keyframes pulse {
@@ -507,6 +507,41 @@
             }
         }
         
+        /* Nuevos estilos para el campo de búsqueda */
+        .search-container {
+            position: relative;
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            display: none;
+        }
+        
+        .search-results div {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-results div:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .search-results div.selected {
+            background-color: var(--light);
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -572,6 +607,11 @@
             .section-title {
                 font-size: 1.3rem;
             }
+            
+            .search-results {
+                position: relative;
+                max-height: 150px;
+            }
         }
     </style>
 </head>
@@ -582,7 +622,7 @@
                 <span class="logo-icon">🌐</span>
                 Combomedia
             </div>
-            <h1>Registro</h1>
+            <h1>Registro 🗳️</h1>
             <p class="subtitle">Complete todos los datos requeridos para el registro en el sistema</p>
         </header>
         
@@ -598,37 +638,37 @@
                     <table>
                         <tr>
                             <td>
-                                <label for="nombre">Nombre *</label>
+                                <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre" required>
                             </td>
                             <td>
-                                <label for="apellido">Apellido *</label>
+                                <label for="apellido">Apellido</label>
                                 <input type="text" id="apellido" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="cedula">Cédula *</label>
+                                <label for="cedula">Cédula</label>
                                 <input type="text" id="cedula" placeholder="Ej: 12345678" required>
                             </td>
                             <td>
-                                <label for="telefono">Teléfono *</label>
+                                <label for="telefono">Teléfono</label>
                                 <input type="tel" id="telefono" placeholder="Ej: 04121234567" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="correo">Correo Electrónico *</label>
+                                <label for="correo">Correo Electrónico</label>
                                 <input type="email" id="correo" placeholder="Ej: nombre@ejemplo.com" required>
                             </td>
                             <td>
-                                <label for="fecha_nac">Fecha de Nacimiento *</label>
+                                <label for="fecha_nac">Fecha de Nacimiento</label>
                                 <input type="date" id="fecha_nac" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="sexo">Sexo *</label>
+                                <label for="sexo">Sexo</label>
                                 <select id="sexo" required>
                                     <option value="">Seleccione...</option>
                                     <option value="Masculino">Masculino</option>
@@ -636,7 +676,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="interes">Interés *</label>
+                                <label for="interes">Interés</label>
                                 <select id="interes" required>
                                     <option value="">Seleccione...</option>
                                     <option value="Comuna">Comuna</option>
@@ -652,7 +692,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <label for="comuna">Comuna *</label>
+                                    <label for="comuna">Comuna</label>
                                     <select id="comuna">
                                         <option value="">Seleccione una comuna</option>
                                         <option value="Parque Central">Parque Central</option>
@@ -666,7 +706,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <label for="residencia">Residencia *</label>
+                                        <label for="residencia">Residencia</label>
                                         <select id="residencia">
                                             <option value="">Seleccione una residencia</option>
                                             <option value="Tejar">Tejar</option>
@@ -687,341 +727,11 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <label for="apto">Apto *</label>
-                                            <select id="apto">
-                                                <option value="">Seleccione un apto</option>
-                                                <option value="01A">01A</option>
-                                                <option value="01B">01B</option>
-                                                <option value="01C">01C</option>
-                                                <option value="01D">01D</option>
-                                                <option value="01E">01E</option>
-                                                <option value="01F">01F</option>
-                                                <option value="01G">01G</option>
-                                                <option value="01H">01H</option>
-                                                <option value="01J">01J</option>
-                                                <option value="01K">01K</option>
-                                                <option value="01L">01L</option>
-                                                <option value="01M">01M</option>
-                                                <option value="01N">01N</option>
-                                                <option value="01P">01P</option>
-                                                <option value="01Q">01Q</option>
-                                                <option value="01R">01R</option>
-                                                <option value="01S">01S</option>
-                                                <option value="01T">01T</option>
-                                                <option value="01U">01U</option>
-                                                <option value="01V">01V</option>
-                                                <option value="02A">02A</option>
-                                                <option value="02B">02B</option>
-                                                <option value="02C">02C</option>
-                                                <option value="02D">02D</option>
-                                                <option value="02E">02E</option>
-                                                <option value="02F">02F</option>
-                                                <option value="02G">02G</option>
-                                                <option value="02H">02H</option>
-                                                <option value="02J">02J</option>
-                                                <option value="02K">02K</option>
-                                                <option value="02L">02L</option>
-                                                <option value="02M">02M</option>
-                                                <option value="02N">02N</option>
-                                                <option value="02P">02P</option>
-                                                <option value="02Q">02Q</option>
-                                                <option value="02R">02R</option>
-                                                <option value="02S">02S</option>
-                                                <option value="02T">02T</option>
-                                                <option value="02U">02U</option>
-                                                <option value="02V">02V</option>
-                                                <option value="03A">03A</option>
-                                                <option value="03B">03B</option>
-                                                <option value="03C">03C</option>
-                                                <option value="03D">03D</option>
-                                                <option value="03E">03E</option>
-                                                <option value="03F">03F</option>
-                                                <option value="03G">03G</option>
-                                                <option value="03H">03H</option>
-                                                <option value="03J">03J</option>
-                                                <option value="03K">03K</option>
-                                                <option value="03L">03L</option>
-                                                <option value="03N">03N</option>
-                                                <option value="03M">03M</option>
-                                                <option value="04A">04A</option>
-                                                <option value="04B">04B</option>
-                                                <option value="04C">04C</option>
-                                                <option value="04D">04D</option>
-                                                <option value="04E">04E</option>
-                                                <option value="04F">04F</option>
-                                                <option value="04G">04G</option>
-                                                <option value="04H">04H</option>
-                                                <option value="04J">04J</option>
-                                                <option value="04K">04K</option>
-                                                <option value="04L">04L</option>
-                                                <option value="04M">04M</option>
-                                                <option value="04N">04N</option>
-                                                <option value="05A">05A</option>
-                                                <option value="05B">05B</option>
-                                                <option value="05C">05C</option>
-                                                <option value="05D">05D</option>
-                                                <option value="05E">05E</option>
-                                                <option value="05F">05F</option>
-                                                <option value="05G">05G</option>
-                                                <option value="05H">05H</option>
-                                                <option value="05J">05J</option>
-                                                <option value="05K">05K</option>
-                                                <option value="05L">05L</option>
-                                                <option value="05M">05M</option>
-                                                <option value="05N">05N</option>
-                                                <option value="06A">06A</option>
-                                                <option value="06B">06B</option>
-                                                <option value="06C">06C</option>
-                                                <option value="06D">06D</option>
-                                                <option value="06E">06E</option>
-                                                <option value="06F">06F</option>
-                                                <option value="06G">06G</option>
-                                                <option value="06H">06H</option>
-                                                <option value="06J">06J</option>
-                                                <option value="06K">06K</option>
-                                                <option value="06L">06L</option>
-                                                <option value="06M">06M</option>
-                                                <option value="06N">06N</option>
-                                                <option value="06P">06P</option>
-                                                <option value="06Q">06Q</option>
-                                                <option value="07A">07A</option>
-                                                <option value="07B">07B</option>
-                                                <option value="07C">07C</option>
-                                                <option value="07D">07D</option>
-                                                <option value="07E">07E</option>
-                                                <option value="07F">07F</option>
-                                                <option value="07G">07G</option>
-                                                <option value="07H">07H</option>
-                                                <option value="07J">07J</option>
-                                                <option value="07K">07K</option>
-                                                <option value="07L">07L</option>
-                                                <option value="07M">07M</option>
-                                                <option value="07N">07N</option>
-                                                <option value="07P">07P</option>
-                                                <option value="07Q">07Q</option>
-                                                <option value="08A">08A</option>
-                                                <option value="08B">08B</option>
-                                                <option value="08C">08C</option>
-                                                <option value="08D">08D</option>
-                                                <option value="08E">08E</option>
-                                                <option value="08F">08F</option>
-                                                <option value="08G">08G</option>
-                                                <option value="08H">08H</option>
-                                                <option value="08J">08J</option>
-                                                <option value="08K">08K</option>
-                                                <option value="08L">08L</option>
-                                                <option value="08M">08M</option>
-                                                <option value="08N">08N</option>
-                                                <option value="08P">08P</option>
-                                                <option value="08Q">08Q</option>
-                                                <option value="09A">09A</option>
-                                                <option value="09B">09B</option>
-                                                <option value="09C">09C</option>
-                                                <option value="09D">09D</option>
-                                                <option value="09E">09E</option>
-                                                <option value="09F">09F</option>
-                                                <option value="09G">09G</option>
-                                                <option value="09H">09H</option>
-                                                <option value="09J">09J</option>
-                                                <option value="09K">09K</option>
-                                                <option value="09L">09L</option>
-                                                <option value="09M">09M</option>
-                                                <option value="09N">09N</option>
-                                                <option value="09P">09P</option>
-                                                <option value="09Q">09Q</option>
-                                                <option value="10A">10A</option>
-                                                <option value="10B">10B</option>
-                                                <option value="10C">10C</option>
-                                                <option value="10D">10D</option>
-                                                <option value="10E">10E</option>
-                                                <option value="10F">10F</option>
-                                                <option value="10G">10G</option>
-                                                <option value="10H">10H</option>
-                                                <option value="10J">10J</option>
-                                                <option value="10K">10K</option>
-                                                <option value="10L">10L</option>
-                                                <option value="10M">10M</option>
-                                                <option value="10N">10N</option>
-                                                <option value="10P">10P</option>
-                                                <option value="10Q">10Q</option>
-                                                <option value="11A">11A</option>
-                                                <option value="11B">11B</option>
-                                                <option value="11C">11C</option>
-                                                <option value="11D">11D</option>
-                                                <option value="11E">11E</option>
-                                                <option value="11F">11F</option>
-                                                <option value="11G">11G</option>
-                                                <option value="11H">11H</option>
-                                                <option value="11J">11J</option>
-                                                <option value="11K">11K</option>
-                                                <option value="11L">11L</option>
-                                                <option value="11M">11M</option>
-                                                <option value="11N">11N</option>
-                                                <option value="11P">11P</option>
-                                                <option value="11Q">11Q</option>
-                                                <option value="12A">12A</option>
-                                                <option value="12B">12B</option>
-                                                <option value="12C">12C</option>
-                                                <option value="12D">12D</option>
-                                                <option value="12E">12E</option>
-                                                <option value="12F">12F</option>
-                                                <option value="12G">12G</option>
-                                                <option value="12H">12H</option>
-                                                <option value="12J">12J</option>
-                                                <option value="12K">12K</option>
-                                                <option value="12L">12L</option>
-                                                <option value="12M">12M</option>
-                                                <option value="12N">12N</option>
-                                                <option value="12P">12P</option>
-                                                <option value="12Q">12Q</option>
-                                                <option value="13A">13A</option>
-                                                <option value="13B">13B</option>
-                                                <option value="13C">13C</option>
-                                                <option value="13D">13D</option>
-                                                <option value="13E">13E</option>
-                                                <option value="13F">13F</option>
-                                                <option value="13G">13G</option>
-                                                <option value="13H">13H</option>
-                                                <option value="13J">13J</option>
-                                                <option value="13K">13K</option>
-                                                <option value="13L">13L</option>
-                                                <option value="13M">13M</option>
-                                                <option value="13N">13N</option>
-                                                <option value="13P">13P</option>
-                                                <option value="13Q">13Q</option>
-                                                <option value="14A">14A</option>
-                                                <option value="14B">14B</option>
-                                                <option value="14C">14C</option>
-                                                <option value="14D">14D</option>
-                                                <option value="14E">14E</option>
-                                                <option value="14F">14F</option>
-                                                <option value="14G">14G</option>
-                                                <option value="14H">14H</option>
-                                                <option value="14J">14J</option>
-                                                <option value="14K">14K</option>
-                                                <option value="14L">14L</option>
-                                                <option value="14M">14M</option>
-                                                <option value="14N">14N</option>
-                                                <option value="14P">14P</option>
-                                                <option value="14Q">14Q</option>
-                                                <option value="15A">15A</option>
-                                                <option value="15B">15B</option>
-                                                <option value="15C">15C</option>
-                                                <option value="15D">15D</option>
-                                                <option value="15E">15E</option>
-                                                <option value="15F">15F</option>
-                                                <option value="15G">15G</option>
-                                                <option value="15H">15H</option>
-                                                <option value="15J">15J</option>
-                                                <option value="15K">15K</option>
-                                                <option value="15L">15L</option>
-                                                <option value="15M">15M</option>
-                                                <option value="15N">15N</option>
-                                                <option value="15P">15P</option>
-                                                <option value="15Q">15Q</option>
-                                                <option value="16A">16A</option>
-                                                <option value="16B">16B</option>
-                                                <option value="16C">16C</option>
-                                                <option value="16D">16D</option>
-                                                <option value="16E">16E</option>
-                                                <option value="16F">16F</option>
-                                                <option value="16G">16G</option>
-                                                <option value="16H">16H</option>
-                                                <option value="16J">16J</option>
-                                                <option value="16K">16K</option>
-                                                <option value="16L">16L</option>
-                                                <option value="16M">16M</option>
-                                                <option value="16N">16N</option>
-                                                <option value="16P">16P</option>
-                                                <option value="16Q">16Q</option>
-                                                <option value="17A">17A</option>
-                                                <option value="17B">17B</option>
-                                                <option value="17C">17C</option>
-                                                <option value="17D">17D</option>
-                                                <option value="17E">17E</option>
-                                                <option value="17F">17F</option>
-                                                <option value="17G">17G</option>
-                                                <option value="17H">17H</option>
-                                                <option value="17J">17J</option>
-                                                <option value="17K">17K</option>
-                                                <option value="17L">17L</option>
-                                                <option value="17M">17M</option>
-                                                <option value="17N">17N</option>
-                                                <option value="17P">17P</option>
-                                                <option value="17Q">17Q</option>
-                                                <option value="18A">18A</option>
-                                                <option value="18B">18B</option>
-                                                <option value="18C">18C</option>
-                                                <option value="18D">18D</option>
-                                                <option value="18E">18E</option>
-                                                <option value="18F">18F</option>
-                                                <option value="18G">18G</option>
-                                                <option value="18H">18H</option>
-                                                <option value="18J">18J</option>
-                                                <option value="18K">18K</option>
-                                                <option value="18L">18L</option>
-                                                <option value="18M">18M</option>
-                                                <option value="18N">18N</option>
-                                                <option value="18P">18P</option>
-                                                <option value="18Q">18Q</option>
-                                                <option value="19A">19A</option>
-                                                <option value="19B">19B</option>
-                                                <option value="19C">19C</option>
-                                                <option value="19D">19D</option>
-                                                <option value="19E">19E</option>
-                                                <option value="19F">19F</option>
-                                                <option value="19G">19G</option>
-                                                <option value="19H">19H</option>
-                                                <option value="19J">19J</option>
-                                                <option value="19K">19K</option>
-                                                <option value="19L">19L</option>
-                                                <option value="19M">19M</option>
-                                                <option value="19N">19N</option>
-                                                <option value="19P">19P</option>
-                                                <option value="19Q">19Q</option>
-                                                <option value="OF101">OF101</option>
-                                                <option value="OF102">OF102</option>
-                                                <option value="OF103">OF103</option>
-                                                <option value="OF104">OF104</option>
-                                                <option value="OF105">OF105</option>
-                                                <option value="OF106">OF106</option>
-                                                <option value="OF107">OF107</option>
-                                                <option value="OF108">OF108</option>
-                                                <option value="OF109">OF109</option>
-                                                <option value="OF110">OF110</option>
-                                                <option value="OF111">OF111</option>
-                                                <option value="OF112">OF112</option>
-                                                <option value="OF113">OF113</option>
-                                                <option value="OF114">OF114</option>
-                                                <option value="OF115">OF115</option>
-                                                <option value="OF116">OF116</option>
-                                                <option value="OF117">OF117</option>
-                                                <option value="OF118">OF118</option>
-                                                <option value="OF119">OF119</option>
-                                                <option value="OF120">OF120</option>
-                                                <option value="OF201">OF201</option>
-                                                <option value="OF202">OF202</option>
-                                                <option value="OF203">OF203</option>
-                                                <option value="OF204">OF204</option>
-                                                <option value="OF205">OF205</option>
-                                                <option value="OF206">OF206</option>
-                                                <option value="OF207">OF207</option>
-                                                <option value="OF208">OF208</option>
-                                                <option value="OF209">OF209</option>
-                                                <option value="OF210">OF210</option>
-                                                <option value="OF211">OF211</option>
-                                                <option value="OF212">OF212</option>
-                                                <option value="OF213">OF213</option>
-                                                <option value="OF214">OF214</option>
-                                                <option value="OF215">OF215</option>
-                                                <option value="OF216">OF216</option>
-                                                <option value="OF217">OF217</option>
-                                                <option value="OF218">OF218</option>
-                                                <option value="OF219">OF219</option>
-                                                <option value="OF220">OF220</option>
-                                                <option value="PH">PH</option>
-
-                                            </select>
+                                            <label for="apto">Apto</label>
+                                            <div class="search-container">
+                                                <input type="text" id="apto" placeholder="Escriba para buscar..." required>
+                                                <div class="search-results" id="aptoResults"></div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -1035,7 +745,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <label for="fundaciones">Fundaciones *</label>
+                                    <label for="fundaciones">Fundaciones</label>
                                     <select id="fundaciones">
                                         <option value="">Seleccione una fundación</option>
                                         <option value="Misión Ribas">Misión Ribas</option>
@@ -1073,6 +783,9 @@
     </div>
 
     <script>
+        // Opciones válidas para apartamentos
+        const opcionesApto = ["01A",	"01B",	"01C",	"01D",	"01E",	"01F",	"01G",	"01H",	"01J",	"01K",	"01L",	"01M",	"01N",	"01P",	"01Q",	"01R",	"01S",	"01T",	"01U",	"01V",	"02A",	"02B",	"02C",	"02D",	"02E",	"02F",	"02G",	"02H",	"02J",	"02K",	"02L",	"02M",	"02N",	"02P",	"02Q",	"02R",	"02S",	"02T",	"02U",	"02V",	"03A",	"03B",	"03C",	"03D",	"03E",	"03F",	"03G",	"03H",	"03J",	"03K",	"03L",	"03N",	"03M",	"04A",	"04B",	"04C",	"04D",	"04E",	"04F",	"04G",	"04H",	"04J",	"04K",	"04L",	"04M",	"04N",	"05A",	"05B",	"05C",	"05D",	"05E",	"05F",	"05G",	"05H",	"05J",	"05K",	"05L",	"05M",	"05N",	"06A",	"06B",	"06C",	"06D",	"06E",	"06F",	"06G",	"06H",	"06J",	"06K",	"06L",	"06M",	"06N",	"06P",	"06Q",	"07A",	"07B",	"07C",	"07D",	"07E",	"07F",	"07G",	"07H",	"07J",	"07K",	"07L",	"07M",	"07N",	"07P",	"07Q",	"08A",	"08B",	"08C",	"08D",	"08E",	"08F",	"08G",	"08H",	"08J",	"08K",	"08L",	"08M",	"08N",	"08P",	"08Q",	"09A",	"09B",	"09C",	"09D",	"09E",	"09F",	"09G",	"09H",	"09J",	"09K",	"09L",	"09M",	"09N",	"09P",	"09Q",	"10A",	"10B",	"10C",	"10D",	"10E",	"10F",	"10G",	"10H",	"10J",	"10K",	"10L",	"10M",	"10N",	"10P",	"10Q",	"11A",	"11B",	"11C",	"11D",	"11E",	"11F",	"11G",	"11H",	"11J",	"11K",	"11L",	"11M",	"11N",	"11P",	"11Q",	"12A",	"12B",	"12C",	"12D",	"12E",	"12F",	"12G",	"12H",	"12J",	"12K",	"12L",	"12M",	"12N",	"12P",	"12Q",	"13A",	"13B",	"13C",	"13D",	"13E",	"13F",	"13G",	"13H",	"13J",	"13K",	"13L",	"13M",	"13N",	"13P",	"13Q",	"14A",	"14B",	"14C",	"14D",	"14E",	"14F",	"14G",	"14H",	"14J",	"14K",	"14L",	"14M",	"14N",	"14P",	"14Q",	"15A",	"15B",	"15C",	"15D",	"15E",	"15F",	"15G",	"15H",	"15J",	"15K",	"15L",	"15M",	"15N",	"15P",	"15Q",	"16A",	"16B",	"16C",	"16D",	"16E",	"16F",	"16G",	"16H",	"16J",	"16K",	"16L",	"16M",	"16N",	"16P",	"16Q",	"17A",	"17B",	"17C",	"17D",	"17E",	"17F",	"17G",	"17H",	"17J",	"17K",	"17L",	"17M",	"17N",	"17P",	"17Q",	"18A",	"18B",	"18C",	"18D",	"18E",	"18F",	"18G",	"18H",	"18J",	"18K",	"18L",	"18M",	"18N",	"18P",	"18Q",	"19A",	"19B",	"19C",	"19D",	"19E",	"19F",	"19G",	"19H",	"19J",	"19K",	"19L",	"19M",	"19N",	"19P",	"19Q",	"OF101",	"OF102",	"OF103",	"OF104",	"OF105",	"OF106",	"OF107",	"OF108",	"OF109",	"OF110",	"OF111",	"OF112",	"OF113",	"OF114",	"OF115",	"OF116",	"OF117",	"OF118",	"OF119",	"OF120",	"OF201",	"OF202",	"OF203",	"OF204",	"OF205",	"OF206",	"OF207",	"OF208",	"OF209",	"OF210",	"OF211",	"OF212",	"OF213",	"OF214",	"OF215",	"OF216",	"OF217",	"OF218",	"OF219",	"OF220",	"PH"];
+        
         // Mostrar/ocultar secciones condicionales
         function toggleConditionalSections() {
             const interes = document.getElementById('interes').value;
@@ -1108,6 +821,8 @@
             document.getElementById('residencia').value = '';
             document.getElementById('apto').value = '';
             document.getElementById('aptoSection').style.display = 'none';
+            document.getElementById('aptoResults').innerHTML = '';
+            document.getElementById('aptoResults').style.display = 'none';
             
             if (comuna === 'Parque Central') {
                 residenciaSection.style.display = 'block';
@@ -1123,12 +838,50 @@
             
             // Resetear campo al cambiar
             document.getElementById('apto').value = '';
+            document.getElementById('aptoResults').innerHTML = '';
+            document.getElementById('aptoResults').style.display = 'none';
             
             if (residencia) {
                 aptoSection.style.display = 'block';
             } else {
                 aptoSection.style.display = 'none';
             }
+        }
+        
+        // Filtrar opciones de apartamento según búsqueda
+        function filtrarAptos() {
+            const busqueda = document.getElementById('apto').value.toLowerCase();
+            const resultados = document.getElementById('aptoResults');
+            
+            // Limpiar resultados anteriores
+            resultados.innerHTML = '';
+            
+            // Filtrar opciones
+            const opcionesFiltradas = opcionesApto.filter(opcion => 
+                opcion.toLowerCase().includes(busqueda)
+            );
+            
+            // Mostrar resultados
+            if (busqueda && opcionesFiltradas.length > 0) {
+                opcionesFiltradas.forEach(opcion => {
+                    const div = document.createElement('div');
+                    div.textContent = opcion;
+                    div.addEventListener('click', () => {
+                        document.getElementById('apto').value = opcion;
+                        resultados.style.display = 'none';
+                    });
+                    resultados.appendChild(div);
+                });
+                resultados.style.display = 'block';
+            } else {
+                resultados.style.display = 'none';
+            }
+        }
+        
+        // Validar si el apto seleccionado es válido
+        function validarApto() {
+            const apto = document.getElementById('apto').value;
+            return opcionesApto.includes(apto);
         }
         
         // Configurar eventos
@@ -1142,6 +895,16 @@
             document.getElementById('interes').addEventListener('change', toggleConditionalSections);
             document.getElementById('comuna').addEventListener('change', toggleResidencias);
             document.getElementById('residencia').addEventListener('change', toggleAptos);
+            
+            // Event listener para búsqueda de apto
+            document.getElementById('apto').addEventListener('input', filtrarAptos);
+            
+            // Ocultar resultados cuando se hace clic fuera
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    document.getElementById('aptoResults').style.display = 'none';
+                }
+            });
             
             // Configurar botón de modal
             document.getElementById('modalButton').addEventListener('click', hideModal);
@@ -1249,7 +1012,12 @@
                 }
                 
                 if (!apto) {
-                    showModal('Error', 'Por favor seleccione un apto', false, true);
+                    showModal('Error', 'Por favor ingrese un apto', false, true);
+                    return false;
+                }
+                
+                if (!validarApto()) {
+                    showModal('Error', 'Por favor seleccione un apto válido de la lista', false, true);
                     return false;
                 }
             } else if (interes === 'Fundacion') {
